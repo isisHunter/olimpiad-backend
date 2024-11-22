@@ -1,0 +1,36 @@
+.table {
+	width: 45%;
+	margin-bottom: 20px;
+	border-collapse: separate;
+    border: 1px solid #dddddd;
+    display: block;
+    margin: auto
+}
+
+.table th {
+	font-weight: bold;
+	padding: 5px;
+    background: #cfcfcf;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+}
+
+.table tbody tr:nth-child(3n+1){
+	background: white;
+}
+
+.table tbody tr:nth-child(3n+2){
+    background: #e3e1f3;
+}
+
+.table tbody tr:nth-child(3n+3){
+    background: #f0dcdc;
+}
+
+.main {
+    background-image: url('DALL·E 2024-11-23 01.13.56 - Elegant ribbons in the colors of the Russian flag (white, blue, and red), gracefully flowing on a deep blue background. The design is created in a mod.webp');
+    background-attachment: fixed; 
+    background-size: cover;
+}

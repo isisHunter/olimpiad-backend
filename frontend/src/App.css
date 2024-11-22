@@ -9,11 +9,12 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 5s linear;
   }
 }
 
 .App-header {
+  /*
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -21,7 +22,32 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: white;*/
+
+    /* Ваши стили */
+    background: linear-gradient(-45deg,
+      #ee7752, /* Первый цвет */
+      #e73c7e, /* Второй цвет */
+      #23a6d5, /* Третий цвет */
+      #23d5ab /* Четвертый цвет */
+    );
+    background-size: 400% 400%;
+    animation: gradient 2.5s ease infinite;
+    height: 100vh;
+}
+
+@keyframes gradient {
+
+0% {
+    background-position: 0% 50%;
+}
+50% {
+    background-position: 100% 50%;
+}
+
+100% {
+    background-position: 0% 50%;
+}
 }
 
 .App-link {
