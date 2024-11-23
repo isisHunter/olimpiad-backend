@@ -2,7 +2,12 @@ import './Main.css';
 function Main() {
     return(
         <div class="main">
-            <header>
+            <div class="page">
+            <header class="main_box">
+                <span class="name">Сайт с олимпиадами</span>
+                <a class="btn" href="##"><span>Поиск по фильтрам</span></a> 
+                <a class="registration" href="##">Вход/Регистрация</a>
+            </header>
             <table class="table">
                 <thead>
                     <tr>
@@ -1713,7 +1718,7 @@ function Main() {
                             <td>3</td> 
                     </tr>
                     <tr>
-                        <td rowspan="4">85</td>
+                        <td rowspan="4" class="a">85</td>
                         <td rowspan="4"><a target="_blank" href="https://dovuz.sfu-kras.ru/abiturientu-sfu/olimpiady/belchonok/">Университетская олимпиада школьников «Бельчонок»</a></td>
                         <td>информатика</td>
                         <td>информатика</td>
@@ -1732,11 +1737,11 @@ function Main() {
                         <tr>
                             <td>химия</td>
                             <td>химия</td>
-                            <td>2</td> 
+                            <td class="b">2</td> 
                     </tr>
                 </tbody>
             </table>
-            </header>
+            </div>
         </div>
     )
 }

@@ -1,19 +1,22 @@
 .table {
-	width: 45%;
+	width: 85%;
 	margin-bottom: 20px;
 	border-collapse: separate;
-    border: 1px solid #dddddd;
+    border: 1px solid #999999;
     display: block;
-    margin: auto
+    margin: auto;
+    border-radius: 20px;
+    border-spacing: 0
 }
 
 .table th {
 	font-weight: bold;
 	padding: 5px;
     background: #cfcfcf;
+    border: 1px solid #999999;
 }
 .table td {
-	border: 1px solid #dddddd;
+	border: 1px solid #999999;
 	padding: 5px;
 }
 
@@ -33,4 +36,118 @@
     background-image: url('DALL·E 2024-11-23 01.13.56 - Elegant ribbons in the colors of the Russian flag (white, blue, and red), gracefully flowing on a deep blue background. The design is created in a mod.webp');
     background-attachment: fixed; 
     background-size: cover;
+}
+
+.table thead tr th:first-child {
+	border-radius: 20px 0 0 0;
+}
+.table thead tr th:last-child {
+	border-radius: 0 20px 0 0;
+}
+
+.a {
+    border-radius: 0 0 0 20px;
+}
+
+.b {
+    border-radius: 0 0 20px 0;
+}
+
+.page {
+    width: 60%;
+    margin: auto;
+    background: white
+}
+.btn {
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 1px;
+    margin: 15px 15px 15px 15px;
+	outline: none;
+	border: 1px solid #999999;
+	border-radius: 10px;
+	height: 46px;
+	line-height: 0;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #fff;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
+	vertical-align: top;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+    top: 50%;
+    left: 12.5%;
+}
+.btn span {
+	display: block;	
+	box-sizing: border-box;
+	padding: 0 25px;    
+	height: 42px;
+	line-height: 38px;    
+	border: 1px solid #999999;
+	border-radius: 10px;    
+	font-size: 14px;
+	color: #FFFFFF;
+	background: linear-gradient(-45deg, red, blue, white);
+	text-align: center;
+	font-weight: 600;
+}
+
+.registration {
+    margin: 15px 15px 15px 15px;
+	display: inline-block;	
+	box-sizing: border-box;
+	padding: 0 25px;
+	outline: none;
+	border: 1px solid #fff;
+    border-radius: 10px;
+	height: 46px;
+	line-height: 46px;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #444;
+	background-color: #fff;
+	box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;  
+	vertical-align: top;
+	transition: box-shadow 0.2s;
+    float: right;
+}
+.registration:focus-visible {
+	border: 1px solid #4c51f9;
+	outline: none;
+}
+.registration:hover {
+	transition: all 0.2s;
+	box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+.registration:active {
+	background-color: #808080;
+}
+
+.name {
+    margin: 15px 15px 15px 15px;
+    color: white;
+    font-size: 50px;
+}
+
+.btn:hover span {
+	color: #999999
+}
+
+.btn:active span {
+	color:  black;
+}
+
+.main_box {
+    background-color: black;
 }
