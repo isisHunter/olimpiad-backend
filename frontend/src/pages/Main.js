@@ -5,9 +5,11 @@ function Main() {
             <div class="page">
             <header class="main_box">
                 <span class="name">Сайт с олимпиадами</span>
-                <a class="btn" href="##"><span>Поиск по фильтрам</span></a> 
                 <a class="registration" href="##">Вход/Регистрация</a>
+                <a class="btn" href="##"><span>Поиск по фильтрам</span></a> 
             </header>
+            <h1 class="h1">Добро пожаловать!</h1>
+            <p class="p">Утвержден перечень олимпиад школьников на 2024/25 учебный год (<a href="http://publication.pravo.gov.ru/document/0001202410040019" target="_blank" rel="noopener">приказ Министерства науки и высшего образования Российской Федерации № 571 от 30.08.2024</a>).</p>
             <table class="table">
                 <thead>
                     <tr>

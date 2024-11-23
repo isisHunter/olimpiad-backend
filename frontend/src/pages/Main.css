@@ -6,9 +6,8 @@
     display: block;
     margin: auto;
     border-radius: 20px;
-    border-spacing: 0
+    border-spacing: 0;
 }
-
 .table th {
 	font-weight: bold;
 	padding: 5px;
@@ -58,45 +57,6 @@
     margin: auto;
     background: white
 }
-.btn {
-	display: inline-block;
-	box-sizing: border-box;
-	padding: 1px;
-    margin: 15px 15px 15px 15px;
-	outline: none;
-	border: 1px solid #999999;
-	border-radius: 10px;
-	height: 46px;
-	line-height: 0;
-	font-size: 14px;
-	font-weight: 500;
-	text-decoration: none;
-	color: #fff;
-	background-color: #fff;
-	position: relative;
-	overflow: hidden;
-	vertical-align: top;
-	cursor: pointer;
-	user-select: none;
-	appearance: none;
-	touch-action: manipulation;
-    top: 50%;
-    left: 12.5%;
-}
-.btn span {
-	display: block;	
-	box-sizing: border-box;
-	padding: 0 25px;    
-	height: 42px;
-	line-height: 38px;    
-	border: 1px solid #999999;
-	border-radius: 10px;    
-	font-size: 14px;
-	color: #FFFFFF;
-	background: linear-gradient(-45deg, red, blue, white);
-	text-align: center;
-	font-weight: 600;
-}
 
 .registration {
     margin: 15px 15px 15px 15px;
@@ -122,14 +82,57 @@
 	transition: box-shadow 0.2s;
     float: right;
 }
+
+.btn {
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 1px;
+    margin: 15px 15px 15px 15px;
+	outline: none;
+	border: 1px solid #999999;
+	border-radius: 10px;
+	height: 46px;
+	line-height: 0;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #fff;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
+	vertical-align: top;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+    top: 50%;
+    float: right;
+}
+
+
+.btn span {
+	display: block;	
+	box-sizing: border-box;
+	padding: 0 25px;    
+	height: 42px;
+	line-height: 38px;    
+	border: 1px solid #999999;
+	border-radius: 10px;    
+	font-size: 14px;
+	color: #FFFFFF;
+	background: linear-gradient(-45deg, red, blue, white);
+	text-align: center;
+	font-weight: 600;
+}
+
 .registration:focus-visible {
 	border: 1px solid #4c51f9;
 	outline: none;
 }
 .registration:hover {
-	transition: all 0.2s;
-	box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
-}
+		background-color: #b9b9b9;
+	}
+
 .registration:active {
 	background-color: #808080;
 }
@@ -141,13 +144,21 @@
 }
 
 .btn:hover span {
-	color: #999999
+	color: #b9b9b9
 }
 
 .btn:active span {
-	color:  black;
+	color:  #808080;
 }
 
 .main_box {
     background-color: black;
+}
+
+.h1 {
+	text-align: center;
+}
+
+.p {
+	text-align: center;
 }
