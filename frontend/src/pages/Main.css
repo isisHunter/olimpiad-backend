@@ -31,12 +31,6 @@
     background: #f0dcdc;
 }
 
-.main {
-    background-image: url('DALL·E 2024-11-23 01.13.56 - Elegant ribbons in the colors of the Russian flag (white, blue, and red), gracefully flowing on a deep blue background. The design is created in a mod.webp');
-    background-attachment: fixed; 
-    background-size: cover;
-}
-
 .table thead tr th:first-child {
 	border-radius: 20px 0 0 0;
 }
@@ -52,7 +46,7 @@
     border-radius: 0 0 20px 0;
 }
 
-.page {
+.main {
     width: 60%;
     margin: auto;
     background: white

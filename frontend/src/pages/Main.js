@@ -2,7 +2,6 @@ import './Main.css';
 function Main() {
     return(
         <div class="main">
-            <div class="page">
             <header class="main_box">
                 <span class="name">Сайт с олимпиадами</span>
                 <a class="registration" href="##">Вход/Регистрация</a>
@@ -1743,7 +1742,6 @@ function Main() {
                     </tr>
                 </tbody>
             </table>
-            </div>
         </div>
     )
 }
