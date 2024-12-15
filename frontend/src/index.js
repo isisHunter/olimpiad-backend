@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import cors from 'cors';
 import './index.css';
 import Main from './pages/Main';
-import Register from './pages/Registration'
 import ConfirmEmail from './pages/EmailConfirmation'
 import Enter from './pages/Enter'
 import Search from './pages/Search'
@@ -15,7 +13,6 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Main />} />
-        <Route path="register" element={<Register />} />
         <Route path="enter" element={<Enter />} />
         <Route path="search" element={<Search />} />
         <Route path="/confirm-email/:token" element={<ConfirmEmail />} />

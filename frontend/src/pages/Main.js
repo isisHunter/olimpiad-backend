@@ -4,12 +4,11 @@ function Main() {
         <div class="main">
             <header class="main_box">
                 <a class="name" href="/">Сайт с олимпиадами</a>
-                <a class="registration" href="register">Регистрация</a>
-                <a class="registration" href="enter">Вход</a>
-                <a class="btn" href="search"><span>Поиск по фильтрам</span></a> 
+                <a class="enter" href="enter">Вход/Регистрация</a>
+                <a class="search" href="search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
             </header>
-            <h1 class="h1">Добро пожаловать!</h1>
-            <p class="p">Утвержден перечень олимпиад школьников на 2024/25 учебный год (<a href="http://publication.pravo.gov.ru/document/0001202410040019" target="_blank" rel="noopener">приказ Министерства науки и высшего образования Российской Федерации № 571 от 30.08.2024</a>).</p>
+            <h1>Добро пожаловать!</h1>
+            <p>Утвержден перечень олимпиад школьников на 2024/25 учебный год (<a href="http://publication.pravo.gov.ru/document/0001202410040019" target="_blank" rel="noopener">приказ Министерства науки и высшего образования Российской Федерации № 571 от 30.08.2024</a>).</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -1743,6 +1742,7 @@ function Main() {
                     </tr>
                 </tbody>
             </table>
+            <footer>Сайт с олимпиадами 2024</footer>
         </div>
     )
 }
