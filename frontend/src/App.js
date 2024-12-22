@@ -1,24 +1,22 @@
-import logo from './959ebf7458ef00cd3a0d2e010a8bdaf01e6334db_original.jpeg';
-import './App.css';
+import React from 'react';
+import Main from './pages/Main';
+import ConfirmEmail from './pages/EmailConfirmation'
+import Enter from './pages/Enter'
+import Search from './pages/Search'
+import Dashboard from './pages/Dashboard';
+import { useAuth } from './authcontext';
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+const App = () => {
+  const { user } = useAuth();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Routes>
+        <Route index element={<Main />} />
+        <Route path="enter" element={!user ? <Enter /> : <Navigate to="/dashboard" />} />
+        <Route path="search" element={<Search />} />
+        <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
+        <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/enter" />} />
+      </Routes>
   );
 }
 

@@ -1,0 +1,39 @@
+h1 {
+	text-align: center;
+}
+
+.exit {
+        margin: 15px 15px 15px 15px;
+      display: inline-block;	
+      box-sizing: border-box;
+      padding: 0 25px;
+      outline: none;
+      border: 1px solid black;
+        border-radius: 10px;
+      height: 46px;
+      line-height: 46px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: whitesmoke;
+      background-color: #e44747;
+      box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+      cursor: pointer;
+      user-select: none;
+      appearance: none;
+      touch-action: manipulation;  
+      vertical-align: top;
+      transition: box-shadow 0.2s;
+}
+
+.exit:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
+    }
+.exit:hover {
+    background-color: #c03c3c;
+}
+    
+.exit:active {
+    background-color: #973030;
+}

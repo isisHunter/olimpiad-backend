@@ -1,10 +1,12 @@
 import './Main.css';
+import { useAuth } from '../authcontext';
 function Main() {
+    const { user } = useAuth();
     return(
         <div class="main">
             <header class="main_box">
                 <a class="name" href="/">Сайт с олимпиадами</a>
-                <a class="enter" href="enter">Вход/Регистрация</a>
+                {user ? (<a class="enter" href="dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="enter">Вход/Регистрация</a>)}
                 <a class="search" href="search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
             </header>
             <h1>Добро пожаловать!</h1>

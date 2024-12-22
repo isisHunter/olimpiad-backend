@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import API from "./api";
 import './Enter.css';
+import { useAuth } from '../authcontext';
+import { useNavigate } from 'react-router-dom';
 
 const Enter = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [action, setAction] = useState("register");
   const [formData, setFormData] = useState({
     email: "",
@@ -29,6 +33,9 @@ const Enter = () => {
         localStorage.setItem("token", token);
         setMessage("Вы успешно вошли!");
         setError("");
+        const userData = {email : formData.email, token : response.data.access};
+        login(userData);
+        navigate('/dashboard');
       }
     } catch (err) {
       setError(err.response?.data?.detail || "Произошла ошибка.");

@@ -59,45 +59,29 @@ transition: box-shadow 0.2s;
 }
 
 .search {
-display: inline-block;
-box-sizing: border-box;
-padding: 1px;
-  margin: 15px 15px 15px 15px;
-outline: none;
-border: 1px solid #999999;
-border-radius: 10px;
-height: 46px;
-line-height: 0;
-font-size: 14px;
-font-weight: 500;
-text-decoration: none;
-color: #fff;
-background-color: #fff;
-position: relative;
-overflow: hidden;
-vertical-align: top;
-cursor: pointer;
-user-select: none;
-appearance: none;
-touch-action: manipulation;
-  top: 50%;
-}
-
-.search span {
-display: block;	
-box-sizing: border-box;
-padding: 0 25px;    
-height: 42px;
-line-height: 38px;    
-border: 1px solid #999999;
-border-radius: 10px;    
-font-size: 14px;
-color: #FFFFFF;
-background: linear-gradient(-45deg, red, blue, white);
-text-align: center;
-font-weight: 600;
-}
-
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 25px;
+    margin: 15px 15px 15px 15px;
+  outline: none;
+  border: 2px solid #b6b6b6;
+  border-radius: 10px;
+  height: 46px;
+  line-height: 42px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(-45deg, red, blue, white);
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  touch-action: manipulation;
+  }
+  
 .enter:focus-visible {
 border: 1px solid #4c51f9;
 outline: none;
