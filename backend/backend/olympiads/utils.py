@@ -15,7 +15,7 @@ def verify_email_token(token):
         return None
     
 def send_confirmation_email(user_email, token):
-    confirmation_url = f"http://127.0.0.1:8000/api/users/confirm-email/{token}/"
+    confirmation_url = f"http://localhost:3000/confirm-email/{token}/"
     subject = "Подтверждение регистрации"
     message = f"Для подтверждения регистрации перейдите по ссылке: {confirmation_url}"
     send_mail(subject, message, 'olimpiad.reminder@gmail.com', [user_email])

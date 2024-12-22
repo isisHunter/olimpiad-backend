@@ -34,18 +34,18 @@ class ConfirmEmailView(APIView):
     def get(self, request, token):
         email = verify_email_token(token)
         if email is None:
-            return Response({"message": "Неверный или истекший токен."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "Неверный или истекший токен"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             user = User.objects.get(email=email)
             if user.is_active:
-                return Response({"message": "Учетная запись уже активирована."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"message": "Учетная запись уже активирована"}, status=status.HTTP_400_BAD_REQUEST)
 
             user.is_active = True
             user.save()
-            return Response({"message": "Email успешно подтвержден. Теперь вы можете войти в систему."}, status=status.HTTP_200_OK)
+            return Response({"message": "Email успешно подтвержден. Теперь вы можете войти в систему"}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
-            return Response({"message": "Пользователь не найден."}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)
         
 class LoginView(APIView):
     def post(self, request):
@@ -58,11 +58,11 @@ class LoginView(APIView):
                 'token': str(refresh.access_token),
                 'refresh': str(refresh),
             }, status=status.HTTP_200_OK)
-        return Response({'detail': 'Неверные email или пароль.'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'detail': 'Неверные email или пароль'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         refresh = request.data.get('refresh')
         if not refresh:
-            return Response({'detail': 'Токен не предоставлен.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Токен не предоставлен'}, status=status.HTTP_400_BAD_REQUEST)
         return super().post(request, *args, **kwargs)

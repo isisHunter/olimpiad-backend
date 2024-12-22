@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Убедитесь, что React Router установлен
+import { useParams } from 'react-router-dom';
 import API from './api';
 
 const ConfirmEmail = () => {
@@ -14,7 +14,7 @@ const ConfirmEmail = () => {
         setMessage(response.data.message);
         setError('');
       } catch (err) {
-        setError(err.response?.data?.message || 'Ошибка подтверждения email.');
+        setError(err.response?.data?.message || 'Ошибка подтверждения email');
         setMessage('');
       }
     };
@@ -23,9 +23,17 @@ const ConfirmEmail = () => {
   }, [token]);
 
   return (
-    <div>
+    <div class="main">
+      <header class="main_box">
+        <a class="name" href="http://localhost:3000/">Сайт с олимпиадами</a>
+        <a class="enter" href="http://localhost:3000/enter">Вход/Регистрация</a>
+        <a class="search" href="http://localhost:3000/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+      </header>
+      <h1>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      </h1>
+      <footer>Сайт с олимпиадами 2024</footer>
     </div>
   );
 };
