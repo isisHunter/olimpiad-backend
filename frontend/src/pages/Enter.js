@@ -25,7 +25,7 @@ const Enter = () => {
     try {
       if (action === "register") {
         const response = await API.post("register/", formData);
-        setMessage("Вы успешно зарегистрировались. Проверьте вашу почту для подтверждения.");
+        setMessage("Вы успешно зарегистрировались. Проверьте вашу почту для подтверждения");
         setError("");
       } else if (action === "login") {
         const response = await API.post("login/", formData);
@@ -38,20 +38,20 @@ const Enter = () => {
         navigate('/dashboard');
       }
     } catch (err) {
-      setError(err.response?.data?.detail || "Произошла ошибка.");
+      setError(err.response?.data?.detail || "Произошла ошибка");
       setMessage("");
     }
   };
 
   return (
     <div class="main">
+        <title>{action === "register" ? "Регистрация" : "Вход"}</title>
         <header class="main_box">
                 <a class="name" href="/">Сайт с олимпиадами</a>
                 <a class="enter" href="enter">Вход/Регистрация</a>
                 <a class="search" href="search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
         </header>
         <h1>{action === "register" ? "Регистрация" : "Вход"}</h1>
-
         <button class="btn" onClick={() => setAction("register")}>Регистрация</button>
         <button  class="btn" onClick={() => setAction("login")}>Вход</button>
         <form onSubmit={handleSubmit}>

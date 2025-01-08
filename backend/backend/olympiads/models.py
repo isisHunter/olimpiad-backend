@@ -27,9 +27,25 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    olympiads = models.ManyToManyField('Olympiad', blank=True, related_name='users')
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.email
+
+class Olympiad(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Subject = models.CharField(max_length=255)
+    Name = models.CharField(max_length=255)
+    Description = models.TextField(blank=True, null=True)
+    Grades = models.JSONField()
+    Type = models.JSONField()
+    Dates = models.JSONField()
+    class Meta:
+        managed = False
+        db_table = 'olympiads'
+        constraints = [
+            models.UniqueConstraint(fields=['ID', 'Subject'], name='unique_id_subject')
+        ]

@@ -16,6 +16,7 @@ const App = () => {
         <Route path="search" element={<Search />} />
         <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/enter" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
   );
 }

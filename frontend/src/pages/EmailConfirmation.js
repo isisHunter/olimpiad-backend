@@ -24,10 +24,11 @@ const ConfirmEmail = () => {
 
   return (
     <div class="main">
+      <title>Подтверждение email</title>
       <header class="main_box">
-        <a class="name" href="http://localhost:3000/">Сайт с олимпиадами</a>
-        <a class="enter" href="http://localhost:3000/enter">Вход/Регистрация</a>
-        <a class="search" href="http://localhost:3000/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+        <a class="name" href="/">Сайт с олимпиадами</a>
+        <a class="enter" href="/enter">Вход/Регистрация</a>
+        <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
       </header>
       <h1>
       {message && <p style={{ color: 'green' }}>{message}</p>}

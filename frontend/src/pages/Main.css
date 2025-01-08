@@ -1,10 +1,10 @@
 .table {
 	width: 85%;
-	margin-bottom: 20px;
 	border-collapse: separate;
     border: 1px solid #999999;
     display: block;
     margin: auto;
+	margin-bottom: 20px;
     border-radius: 20px;
     border-spacing: 0;
 }

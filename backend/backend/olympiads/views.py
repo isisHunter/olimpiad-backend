@@ -5,8 +5,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenRefreshView
 from django.contrib.auth import authenticate
-from .serializers import UserSerializer
-from .models import User
+from .serializers import UserSerializer, OlympiadSerializer
+from .models import User, Olympiad
 from .utils import generate_email_token, send_confirmation_email, verify_email_token
 
 class RegisterView(APIView):
@@ -29,7 +29,7 @@ class RegisterView(APIView):
                 "access": str(refresh.access_token),
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 class ConfirmEmailView(APIView):
     def get(self, request, token):
         email = verify_email_token(token)
@@ -46,7 +46,7 @@ class ConfirmEmailView(APIView):
             return Response({"message": "Email успешно подтвержден. Теперь вы можете войти в систему"}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"message": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)
-        
+
 class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -66,3 +66,27 @@ class CustomTokenRefreshView(TokenRefreshView):
         if not refresh:
             return Response({'detail': 'Токен не предоставлен'}, status=status.HTTP_400_BAD_REQUEST)
         return super().post(request, *args, **kwargs)
+
+class OlympiadListView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        grade = request.query_params.get('grade')
+        subject = request.query_params.get('subject')
+        olympiads = Olympiad.objects.using('olympiads').all()
+        serializer = OlympiadSerializer(olympiads, many=True)
+        if grade:
+            olympiads = olympiads.filter(grade=grade)
+        if subject:
+            olympiads = olympiads.filter(subject__icontains=subject)
+        serializer = OlympiadSerializer(olympiads, many=True)
+        return Response(serializer.data)
+
+class UserOlympiadView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        olympiad_ids = request.data.get('olympiads', [])
+        user = request.user
+        olympiads = Olympiad.objects.using('olympiads').filter(id__in=olympiad_ids)
+        user.olympiads.set(olympiads)
+        user.save()
+        return Response({'message': 'Олимпиады обновлены'})

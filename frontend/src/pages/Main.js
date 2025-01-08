@@ -4,6 +4,7 @@ function Main() {
     const { user } = useAuth();
     return(
         <div class="main">
+            <title>Сайт с олимпиадами</title>
             <header class="main_box">
                 <a class="name" href="/">Сайт с олимпиадами</a>
                 {user ? (<a class="enter" href="dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="enter">Вход/Регистрация</a>)}
