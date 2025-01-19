@@ -24,7 +24,7 @@ const Enter = () => {
 
     try {
       if (action === "register") {
-        const response = await API.post("register/", formData);
+        await API.post("register/", formData);
         setMessage("Вы успешно зарегистрировались. Проверьте вашу почту для подтверждения");
         setError("");
       } else if (action === "login") {
@@ -33,7 +33,7 @@ const Enter = () => {
         localStorage.setItem("token", token);
         setMessage("Вы успешно вошли!");
         setError("");
-        const userData = {email : formData.email, token : response.data.access};
+        const userData = {email : formData.email, token : token};
         login(userData);
         navigate('/dashboard');
       }
@@ -55,7 +55,7 @@ const Enter = () => {
         <button class="btn" onClick={() => setAction("register")}>Регистрация</button>
         <button  class="btn" onClick={() => setAction("login")}>Вход</button>
         <form onSubmit={handleSubmit}>
-            <div>
+          <div>
             <label>Email:</label>
             <input
                 type="email"
@@ -64,8 +64,8 @@ const Enter = () => {
                 onChange={handleChange}
                 required
             />
-            </div>
-            <div>
+          </div>
+          <div>
             <label>Пароль:</label>
             <input
                 type="password"
@@ -74,12 +74,14 @@ const Enter = () => {
                 onChange={handleChange}
                 required
             />
+            <div>
+              <button type="submit" class="search"><span>{action === "register" ? "Зарегистрироваться" : "Войти"}</span></button>
             </div>
-            <button type="submit" class="search"><span>{action === "register" ? "Зарегистрироваться" : "Войти"}</span></button>
+          </div>
         </form>
         {message && <p style={{ color: "green" }}>{message}</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <footer>Сайт с олимпиадами 2024</footer>
+        <footer>Сайт с олимпиадами 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a></footer>
     </div>
   );
 };

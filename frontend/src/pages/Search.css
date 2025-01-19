@@ -1,3 +1,121 @@
 h1 {
 	text-align: center;
+	margin-bottom: 0;
+}
+
+.filters {
+	display: flex;
+	justify-content: center;
+}
+
+footer {
+	margin-top: 20px;
+}
+
+select {
+	height: 27px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 17px;
+	border: 1px solid;
+}
+
+.olimpiada_name {
+	font-size: 25px;
+	font-weight: 600;
+	margin: 0;
+	padding: 0 20px;
+	text-align: left;
+	color: black;
+}
+
+.olimpiada_info {
+	font-size: 22px;
+	font-weight: 475;
+	margin: 0;
+	padding: 0 20px;
+	text-align: left;
+	color: black;
+	border-bottom: 2px solid #b6b6b6;
+	padding-bottom: 3px;
+}
+
+.olimpiada_description {
+	margin: 0;
+	padding: 0 20px;
+	text-align: left;
+}
+
+.olimpiada_date {
+	margin: 0;
+	font-weight: 400;
+	font-size: 20px;
+	padding: 0 20px;
+	text-align: left;
+}
+
+.olimpiada_moreinfo {
+	padding: 0;
+	display: block;
+	width: 100%;
+	border: 0;
+	background-color: whitesmoke;
+	font-weight: 500;
+	font-size: 20px;
+	border-radius: 0 0 20px 20px;
+	text-align: center;
+	padding-bottom: 2px;
+	cursor: pointer;
+}
+
+.olimpiada_moreinfo:hover:enabled {
+	background-color: #d9d9d9;
+}
+
+.olimpiada_moreinfo:active:enabled {
+	background-color: #d1d1d1;
+}
+
+.olimpiada_moreinfo:disabled {
+	color: black;
+	cursor: default;
+}
+
+.olimpiada_date:last-of-type {
+	border-bottom: 2px solid #b6b6b6;
+	padding-bottom: 3px;
+}
+
+.olimpiada {
+	box-sizing: border-box;
+	margin: 20px 20px 20px 20px;
+	background: whitesmoke;
+	border-radius: 20px;
+}
+
+.soglashenie {
+	display: block;
+	width: 100%;
+	font-weight: 500;
+	font-size: 20px;
+	border: 0;
+	border-bottom: 2px solid #b6b6b6;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 3px;
+	cursor: pointer;
+}
+
+.soglashenie:hover:enabled {
+	background-color: #d9d9d9;
+}
+
+.soglashenie:active:enabled {
+	background-color: #d1d1d1;
+}
+
+.soglashenie:disabled {
+	cursor: default;
+	background-color: #e6e6e6;
+	color: #b1b1b1;
 }

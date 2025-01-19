@@ -9,9 +9,9 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('email',)
 
 class OlympiadAdmin(admin.ModelAdmin):
-    list_display = ('ID', 'Subject', 'Name', 'Type', 'Dates')
-    list_filter = ('Subject',)
-    search_fields = ('Name', 'Description', 'ID', 'Subject')
+    list_display = ('id', 'subject', 'name', 'type', 'dates')
+    list_filter = ('subject',)
+    search_fields = ('name', 'description', 'id', 'subject')
 
     def get_queryset(self, request):
         return super().get_queryset(request).using('olympiads')

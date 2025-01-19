@@ -34,7 +34,7 @@ const ConfirmEmail = () => {
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       </h1>
-      <footer>Сайт с олимпиадами 2024</footer>
+      <footer>Сайт с олимпиадами 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a></footer>
     </div>
   );
 };

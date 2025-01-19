@@ -77,6 +77,12 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -107,8 +113,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
     'olympiads': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'olympiads.db',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'olympiads',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
     },
 }
 

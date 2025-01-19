@@ -2,9 +2,20 @@ h1 {
 	text-align: center;
 }
 
+h2 {
+  text-align: center;
+}
+
 .exit {
-        margin: 15px 15px 15px 15px;
-      display: inline-block;	
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.exit button {
+      margin: 0;
+      display: flex;
+      justify-content: center;	
       box-sizing: border-box;
       padding: 0 25px;
       outline: none;
@@ -26,14 +37,14 @@ h1 {
       transition: box-shadow 0.2s;
 }
 
-.exit:focus-visible {
+.exit button:focus-visible {
     border: 1px solid #4c51f9;
     outline: none;
     }
-.exit:hover {
+.exit button:hover {
     background-color: #c03c3c;
 }
     
-.exit:active {
+.exit button:active {
     background-color: #973030;
 }

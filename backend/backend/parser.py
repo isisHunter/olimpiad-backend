@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from time import sleep
 from html import unescape
-from sqlite3 import connect
+from psycopg2 import connect
 from json import dumps
 
 def get_grade(element):
@@ -29,9 +29,9 @@ def get_time(element):
         for i in dates:
             for j, k in enumerate(i):
                 if k in "АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                    clear_dates[i[j:]] = i[0:j-1].split("...")
-                    if " " not in clear_dates[i[j:]][0]:
-                        clear_dates[i[j:]][0] += clear_dates[i[j:]][1][-4:]
+                    clear_dates[i[j:]] = i[0:j-1].replace("...", " - ")
+#                    if " " not in clear_dates[i[j:]][0]:
+#                        clear_dates[i[j:]][0] += clear_dates[i[j:]][1][-4:]
                     break
         return clear_dates
     except NoSuchElementException:
@@ -63,7 +63,7 @@ def parse_olympiads(url):
 
 def add_olympiad(id, subject, name, description,grades, dates):
     cursor.execute(
-        "INSERT INTO Olympiads (ID, Subject, Name, Description, Grades, Type, Dates) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO Olympiads (ID, Subject, Name, Description, Grades, Type, Dates) VALUES (%s, %s, %s, %s, %s, %s, %s)",
         (
             id,
             subject,
@@ -85,7 +85,13 @@ if __name__ == "__main__":
     service = Service("C:/chromedriver-win64/chromedriver.exe")
     driver = webdriver.Chrome(service=service, options=options)
 
-    conn = connect("olympiads.db")
+    conn = connect(
+        dbname="olympiads",
+        user="postgres",
+        password="12345",
+        host="localhost",
+        port="5432"
+    )
     cursor = conn.cursor()
     cursor.execute(
     """
@@ -94,9 +100,9 @@ if __name__ == "__main__":
         Subject TEXT NOT NULL,
         Name TEXT NOT NULL,
         Description TEXT NOT NULL,
-        Grades TEXT NOT NULL,
-        Type TEXT NOT NULL,
-        Dates TEXT NOT NULL,
+        Grades JSONB NOT NULL,
+        Type JSONB NOT NULL,
+        Dates JSONB NOT NULL,
         PRIMARY KEY (ID, Subject)
     )
     """
@@ -121,10 +127,10 @@ if __name__ == "__main__":
             else:
                 types[element.get_attribute("act")] = [type_names[type_name]]
     for id in types:
-        cursor.execute("SELECT ID, Subject, Type FROM Olympiads WHERE ID = ?", (id,))
+        cursor.execute("SELECT ID, Subject, Type FROM Olympiads WHERE ID = %s", (id,))
         rows = cursor.fetchall()
         for row in rows:
-            cursor.execute("UPDATE Olympiads SET Type = ? WHERE ID = ? AND Subject = ?", (dumps(types[id]), row[0], row[1]))
+            cursor.execute("UPDATE Olympiads SET Type = %s WHERE ID = %s AND Subject = %s", (dumps(types[id]), row[0], row[1]))
     conn.commit()
 
     conn.close()

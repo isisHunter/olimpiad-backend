@@ -1745,7 +1745,7 @@ function Main() {
                     </tr>
                 </tbody>
             </table>
-            <footer>Сайт с олимпиадами 2024</footer>
+            <footer>Сайт с олимпиадами 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a></footer>
         </div>
     )
 }
