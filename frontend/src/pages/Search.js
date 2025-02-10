@@ -32,29 +32,25 @@ const SearchPage = () => {
     };
 
     const findOlympiads = async () => {
-      const params = new URLSearchParams();
-      params.append('grade', filter.grade);
-      params.append('subject', filter.subject);
-      params.append('type', filter.type);
-      let response = await API.get(`olympiads/?${params}`);
+      let response = await API.get(`olympiads/?grade=${filter.grade}&subject=${filter.subject}&type=${filter.type}`);
       let data = await response.data;
       setOlympiads(data);
-      data.map((olympiad) => (setButtons1((prevButtons) => ({...prevButtons, [olympiad.id]: ["Буду участвовать", false]}))));
       data.map((olympiad) => (setButtons2((prevButtons) => ({...prevButtons, [olympiad.id]: ["Показать дополнительную информацию и ссылку на регистрацию", false]}))));
       if (user) {
+        data.map((olympiad) => (setButtons1((prevButtons) => ({...prevButtons, [olympiad.id]: ["Буду участвовать", false]}))));
         response = await API.get(`user/olympiads-get`);
         data = await response.data;
+        data.map((id) => (setButtons1((prevButtons) => ({...prevButtons, [id] : ["Вы указали своё участие в этой олимпиаде. Вам на почту будут приходить оповещения об её изменениях", true]}))))
       }
-      data.map((id) => (setButtons1((prevButtons) => ({...prevButtons, [id] : ["Вы указали своё участие в этой олимпиаде. Вам на почту будут приходить оповещения об её изменениях", true]}))))
     };
 
     return(
         <div class="main">
             <title>Поиск</title>
             <header class="main_box">
-                <a class="name" href="/">Сайт с олимпиадами</a>
-                {user ? (<a class="enter" href="dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="enter">Вход/Регистрация</a>)}
-                <a class="search" href="search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="name" href="/">rosolympiad.ru</a>
+                {user ? (<a class="enter" href="/dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="/enter">Вход/Регистрация</a>)}
+                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
             </header>
             <h1>Поиск олимпиад</h1>
             <div class="filters">
@@ -119,12 +115,14 @@ const SearchPage = () => {
                   <div class="olimpiada" id={olympiad.id}>
                     {olympiad && <p class="olimpiada_name">{olympiad.name}</p>}
                     {olympiad && <p class="olimpiada_info">{olympiad.description}</p>}
+                    {olympiad && <p class="olimpiada_info">Рейтинг<div class="olimpiada_rating"><div class="progress-bar"><progress value={olympiad.rating} max="100"/></div><div class="background"/></div></p>}
+                    {olympiad && <hr/>}
                     {olympiad && <div class="olimpiada_dates">{olympiad.dates && Object.entries(olympiad.dates).map(([name, date]) => (<p class = "olimpiada_date">{name}: {date}</p>))}</div>}
                     {user && olympiad && <button class="soglashenie" onClick={() => confirmParticipation(olympiad.id, olympiad.subject)} disabled={buttons1[olympiad.id][1]}>{buttons1[olympiad.id][0]}</button>}
                     {olympiad && <button class="olimpiada_moreinfo" onClick={() => showContacts(olympiad.id)} disabled={buttons2[olympiad.id][1]}>{buttons2[olympiad.id][0]}</button>}
                   </div>
                 ))) : (<h1 style={{color : "red"}}>Олимпиады не найдены</h1>)}
-            <footer>Сайт с олимпиадами 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a></footer>
+            <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
         </div>
         )
 }

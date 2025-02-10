@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
+    last_password_reset = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -38,6 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Olympiad(models.Model):
     id = models.IntegerField(primary_key=True)
     subject = models.CharField(max_length=255)
+    rating = models.IntegerField()
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     grades = models.JSONField()

@@ -29,9 +29,7 @@ def get_time(element):
         for i in dates:
             for j, k in enumerate(i):
                 if k in "АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                    clear_dates[i[j:]] = i[0:j-1].replace("...", " - ")
-#                    if " " not in clear_dates[i[j:]][0]:
-#                        clear_dates[i[j:]][0] += clear_dates[i[j:]][1][-4:]
+                    clear_dates[i[j:]] = i[:j-1].replace("...", " - ")
                     break
         return clear_dates
     except NoSuchElementException:
@@ -58,15 +56,21 @@ def parse_olympiads(url):
     scroll_to_load(driver)
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "megalist")))
     container = driver.find_element(By.ID, "megalist").find_elements(By.CLASS_NAME, "fav_olimp.olimpiada")
-    results = [[element.get_attribute("act"), element.find_element(By.CLASS_NAME, "headline").text, get_info(element), get_grade(element.find_element(By.CLASS_NAME, "classes_dop")), get_time(element)] for element in container]
+    results = [[element.get_attribute("act"),
+                element.find_element(By.CLASS_NAME, "pl_rating").text,
+                element.find_element(By.CLASS_NAME, "headline").text, 
+                get_info(element), 
+                get_grade(element.find_element(By.CLASS_NAME, "classes_dop")), 
+                get_time(element)] for element in container]
     return results
 
-def add_olympiad(id, subject, name, description,grades, dates):
+def add_olympiad(id, subject, rating, name, description, grades, dates):
     cursor.execute(
-        "INSERT INTO Olympiads (ID, Subject, Name, Description, Grades, Type, Dates) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+        "INSERT INTO Olympiads (ID, Subject, Rating, Name, Description, Grades, Type, Dates) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
         (
             id,
             subject,
+            float(rating.replace(",", ".")) * 10,
             name,
             description,
             dumps(grades),
@@ -93,11 +97,13 @@ if __name__ == "__main__":
         port="5432"
     )
     cursor = conn.cursor()
+    cursor.execute("DROP TABLE IF EXISTS Olympiads")
     cursor.execute(
     """
-    CREATE TABLE IF NOT EXISTS Olympiads (
+    CREATE TABLE Olympiads (
         ID INTEGER NOT NULL,
         Subject TEXT NOT NULL,
+        Rating INTEGER NOT NULL,
         Name TEXT NOT NULL,
         Description TEXT NOT NULL,
         Grades JSONB NOT NULL,
@@ -108,11 +114,11 @@ if __name__ == "__main__":
     """
     )
 
-    subjects = {"Биология" : 11, "География" : 10, "Информатика" : 7, "Математика" : 6, "Физика" : 12, "Химия" : 13, "Астрономия" : 20, "ИЗО" : 22, "Искусство" : 18, "История" : 8, "Лингвистика" : 24, "Литература" : 2, "ОБЖ" : 16, "Обществознание" : 9, "Предпринимательство" : 23, "Право" : 15, "Психология" : 28, "Робототехника" : 27, "Русский язык" : 1, "Технологии" : 17, "Физкультура" : 19, "Черчение" : 31, "Экология" : 21, "Экономика" : 14, "Иностранные языки" : 32}
+    subjects = {"Биология" : 11, "География" : 10, "Информатика" : 7, "Математика" : 6, "Физика" : 12, "Химия" : 13, "Астрономия" : 20, "ИЗО" : 22, "Искусство" : 18, "История" : 8, "Лингвистика" : 24, "Литература" : 2, "ОБЖ" : 16, "Обществознание" : 9, "Предпринимательство" : 23, "Право" : 15, "Психология" : 28, "Робототехника" : 27, "Русский язык" : 1, "Технологии" : 17, "Физкультура" : 19, "Черчение" : 31, "Экология" : 21, "Экономика" : 14, "Иностранные языки" : "3%5D=on&subject%5B32%5D=on&subject%5B25%5D=on&subject%5B30%5D=on&subject%5B29%5D=on&subject%5B35%5D=on&subject%5B26%5D=on&subject%5B4%5D=on&subject%5B5%5D=on&subject%5B34%5D=on&subject%5B0"}
     for subject in subjects:
         olympiads = parse_olympiads(f"https://olimpiada.ru/activities?subject%5B{subjects[subject]}%5D=on&class=any&type=any&period_date=&period=year")
         for olympiad in olympiads:
-            add_olympiad(olympiad[0], subject, olympiad[1], olympiad[2], olympiad[3], olympiad[4])
+            add_olympiad(olympiad[0], subject, olympiad[1], olympiad[2], olympiad[3], olympiad[4], olympiad[5])
 
     type_names = {"9" : "Командные", "ind": "Очные", "dist": "Дистанционные"}
     types = {}

@@ -4,7 +4,7 @@ from .models import User, Olympiad
 class OlympiadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Olympiad
-        fields = ['id', 'subject', 'name', 'description', 'grades', 'type', 'dates']
+        fields = ['id', 'subject', 'rating', 'name', 'description', 'grades', 'type', 'dates']
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

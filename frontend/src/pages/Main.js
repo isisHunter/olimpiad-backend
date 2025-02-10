@@ -4,11 +4,10 @@ function Main() {
     const { user } = useAuth();
     return(
         <div class="main">
-            <title>Сайт с олимпиадами</title>
             <header class="main_box">
-                <a class="name" href="/">Сайт с олимпиадами</a>
-                {user ? (<a class="enter" href="dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="enter">Вход/Регистрация</a>)}
-                <a class="search" href="search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="name" href="/">rosolympiad.ru</a>
+                {user ? (<a class="enter" href="/dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="/enter">Вход/Регистрация</a>)}
+                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
             </header>
             <h1>Добро пожаловать!</h1>
             <p>Утвержден перечень олимпиад школьников на 2024/25 учебный год (<a href="http://publication.pravo.gov.ru/document/0001202410040019" target="_blank" rel="noopener">приказ Министерства науки и высшего образования Российской Федерации № 571 от 30.08.2024</a>).</p>
@@ -1745,7 +1744,7 @@ function Main() {
                     </tr>
                 </tbody>
             </table>
-            <footer>Сайт с олимпиадами 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a></footer>
+            <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
         </div>
     )
 }

@@ -1,7 +1,3 @@
-h1 {
-	text-align: center;
-}
-
 h2 {
   text-align: center;
 }
@@ -34,15 +30,16 @@ h2 {
       appearance: none;
       touch-action: manipulation;  
       vertical-align: top;
-      transition: box-shadow 0.2s;
 }
 
 .exit button:focus-visible {
     border: 1px solid #4c51f9;
     outline: none;
     }
+
 .exit button:hover {
     background-color: #c03c3c;
+    transition: all 0.1s;
 }
     
 .exit button:active {

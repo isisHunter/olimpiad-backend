@@ -54,7 +54,6 @@ code {
   appearance: none;
   touch-action: manipulation;  
   vertical-align: top;
-  transition: box-shadow 0.2s;
   float: right;
 }
 
@@ -80,6 +79,7 @@ code {
   user-select: none;
   appearance: none;
   touch-action: manipulation;
+  box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
   }
   
 .enter:focus-visible {
@@ -88,6 +88,7 @@ code {
 }
 .enter:hover {
   background-color: #b9b9b9;
+  transition: all 0.1s;
 }
 
 .enter:active {
@@ -95,7 +96,8 @@ code {
 }
 
 .search:hover span {
-  color: #b9b9b9
+  color: #b9b9b9;
+  transition: all 0.1s;
 }
 
 .search:active span {
@@ -104,7 +106,7 @@ code {
 
 footer {
   background-color:  #dadada;
-  font-size: 23px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
 }
