@@ -138,6 +138,5 @@ if __name__ == "__main__":
         for row in rows:
             cursor.execute("UPDATE Olympiads SET Type = %s WHERE ID = %s AND Subject = %s", (dumps(types[id]), row[0], row[1]))
     conn.commit()
-
     conn.close()
     driver.quit()

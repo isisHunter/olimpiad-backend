@@ -48,7 +48,7 @@ code {
   text-decoration: none;
   color: #444;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+  box-shadow: 0 8px 10px rgb(65 132 144 / 10%), 0 3px 9px rgb(0 0 0 / 8%);
   cursor: pointer;
   user-select: none;
   appearance: none;

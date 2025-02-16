@@ -168,4 +168,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'olimpiad.reminder@gmail.com'
 EMAIL_HOST_PASSWORD = 'ulsc ttzb fmao yfok'
-DEFAULT_FROM_EMAIL = 'olimpiad.reminder@gmail.com'
+DEFAULT_FROM_EMAIL = 'rosolympiad.ru <olimpiad.reminder@gmail.com>'

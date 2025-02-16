@@ -9,7 +9,7 @@ select {
     border-radius: 10px;
     font-size: 17px;
 	border: 1px solid;
-	box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+	box-shadow: 0 8px 10px rgb(65 132 144 / 10%), 0 3px 9px rgb(0 0 0 / 8%);
 }
 
 .olimpiada_name {
@@ -129,7 +129,7 @@ hr {
 	margin: 20px 20px 20px 20px;
 	background: whitesmoke;
 	border-radius: 20px;
-	box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+	box-shadow: 0 8px 10px rgb(65 132 144 / 10%), 0 3px 9px rgb(0 0 0 / 8%);
 }
 
 .soglashenie {

@@ -53,38 +53,10 @@ class Command(BaseCommand):
             last_height = new_height
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.SUCCESS(f'Программа успешно звершена'))
+        self.stdout.write(self.style.SUCCESS("Программа успешно завершена"))
 
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-    service = Service("C:/chromedriver-win64/chromedriver.exe")
-    driver = webdriver.Chrome(service=service, options=options)
-
-    conn = connect(
-        dbname="olympiads",
-        user="postgres",
-        password="12345",
-        host="localhost",
-        port="5432"
-    )
-
+    conn = connect(dbname="olympiads", user="postgres", password="12345", host="localhost", port="5432")
     cursor = conn.cursor()
-    driver.get(f"https://olimpiada.ru/activities")
-    scroll_to_load(driver)
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "megalist")))
-    container = driver.find_element(By.ID, "megalist").find_elements(By.CLASS_NAME, "fav_olimp.olimpiada")
-    results = []
-    for element in container:
-        results.append([element.get_attribute("act"), element.find_element(By.CLASS_NAME, "headline").text, get_info(element), get_time(element)])
-    for id in results:
-        cursor.execute("SELECT ID, Subject, Name, Description, Dates FROM Olympiads WHERE ID = %s", (id[0],))
-        rows = cursor.fetchall()
-        for row in rows:
-            cursor.execute("UPDATE Olympiads SET Name = %s, Description = %s, Dates = %s WHERE ID = %s AND Subject = %s", (id[1], id[2], dumps(id[3]), row[0], row[1]))
-    conn.commit()
-    driver.quit()
 
     user_conn = user_connect("C:/olimpiad-backend/backend/backend/db.sqlite3")
     user_cursor = user_conn.cursor()
@@ -99,7 +71,7 @@ class Command(BaseCommand):
                     if " - " not in dates[0][date]:
                         date_time = get_date(dates[0][date])
                         if date_time.date() == now().date() + timedelta(days=2):
-                            send_mail(f"{dates[1]}: послезавтра состоится {date}", f"В выбранных Вами олимпиадах произошли изменения:\nПослезавтра, {dates[0][date]}, состоится {date}, найти ссылку на регистрацию Вы можете найти в личном кабинете https://rosolympiad.ru/dashboard")        
+                            send_mail(f"{dates[1]}: послезавтра состоится {date}", f"В выбранных вами олимпиадах ({dates[1]}) произошли изменения:\nПослезавтра, {dates[0][date]}, состоится {date}, найти ссылку на регистрацию вы можете найти в своём личном кабинете https://rosolympiad.ru/dashboard", 'rosolympiad.ru <olimpiad.reminder@gmail.com>', [user_olympiad[0]])        
                     else:
                         dates[0][date] = dates[0][date].split(" - ")
                         if  " " not in dates[0][date][0]:
@@ -107,8 +79,30 @@ class Command(BaseCommand):
                         date_time_start = get_date(dates[0][date][0])
                         date_time_end = get_date(dates[0][date][1])
                         if date_time_start.date() == now().date() + timedelta(days=2):
-                            send_mail(f"{dates[1]}: послезавтра начинается {date}", f"В выбранных Вами олимпиадах произошли изменения:\nПослезавтра, {dates[0][date][0]}, начинается {date}, найти ссылку на регистрацию Вы можете найти в личном кабинете https://rosolympiad.ru/dashboard")
+                            send_mail(f"{dates[1]}: послезавтра начинается {date}", f"В выбранных вами олимпиадах ({dates[1]}) произошли изменения:\nПослезавтра, {dates[0][date][0]}, начинается {date} и длится до {dates[0][date][1]}. Найти ссылку на регистрацию вы можете найти в своём личном кабинете https://rosolympiad.ru/dashboard", 'rosolympiad.ru <olimpiad.reminder@gmail.com>', [user_olympiad[0]])
                         if date_time_end.date() == now().date() + timedelta(days=2):
-                            send_mail(f"{dates[1]}: послезавтра заканчивается {date}", f"В выбранных Вами олимпиадах произошли изменения:\nПослезавтра, {dates[0][date][1]}, заканчивается {date}, найти ссылку на регистрацию Вы можете найти в личном кабинете https://rosolympiad.ru/dashboard")
+                            send_mail(f"{dates[1]}: послезавтра заканчивается {date}", f"В выбранных вами олимпиадах ({dates[1]}) произошли изменения:\nПослезавтра, {dates[0][date][1]}, заканчивается {date}, найти ссылку на регистрацию вы можете найти в своём личном кабинете https://rosolympiad.ru/dashboard", 'rosolympiad.ru <olimpiad.reminder@gmail.com>', [user_olympiad[0]])
     user_conn.close()
+
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    service = Service("C:/chromedriver-win64/chromedriver.exe")
+    driver = webdriver.Chrome(service=service, options=options)
+
+    driver.get("https://olimpiada.ru/activities")
+    scroll_to_load(driver)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "megalist")))
+    container = driver.find_element(By.ID, "megalist").find_elements(By.CLASS_NAME, "fav_olimp.olimpiada")
+    results = []
+    for element in container:
+        results.append([element.get_attribute("act"), element.find_element(By.CLASS_NAME, "headline").text, get_info(element), get_time(element)])
+    for result in results:
+        cursor.execute("SELECT ID, Subject, Name, Description, Dates FROM Olympiads WHERE ID = %s", (result[0],))
+        rows = cursor.fetchall()
+        for row in rows:
+            cursor.execute("UPDATE Olympiads SET Name = %s, Description = %s, Dates = %s WHERE ID = %s AND Subject = %s", (result[1], result[2], dumps(result[3]), row[0], row[1]))
+    conn.commit()
+    driver.quit()
     conn.close()

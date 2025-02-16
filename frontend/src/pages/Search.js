@@ -13,8 +13,8 @@ const SearchPage = () => {
     const { user } = useAuth();
 
     const confirmParticipation = async (id) => {
-      await API.post('user/olympiads/', id);
       setButtons1((prevButtons) => ({...prevButtons, [id]: ["Вы указали своё участие в этой олимпиаде. Вам на почту будут приходить оповещения об её изменениях", true]}));
+      await API.post('user/olympiads/', id);
     };
     
     const showContacts = async (id) => {

@@ -24,7 +24,7 @@ class RegisterView(APIView):
             user.is_active = False
             user.save()
             token = URLSafeTimedSerializer(settings.SECRET_KEY).dumps(user.email, salt='email-confirmation')
-            send_mail("Подтверждение регистрации", f"Для подтверждения регистрации перейдите по ссылке: https://rosolympiad.ru/confirm-email/{token}/", 'olimpiad.reminder@gmail.com', [user.email])
+            send_mail("Подтверждение регистрации", f"Для подтверждения регистрации перейдите по ссылке: https://rosolympiad.ru/confirm-email/{token}/", 'rosolympiad.ru <olimpiad.reminder@gmail.com>', [user.email])
             refresh = RefreshToken.for_user(user)
             return Response({
                 "user": {
@@ -84,7 +84,7 @@ class ResetPasswordView(APIView):
             user.set_password(new_password)
             user.last_password_reset = now()
             user.save()
-            send_mail('Сброс пароля', f'Ваш новый пароль: {new_password}\nДля входа перейдите на https://rosolympiad.ru/enter', 'olimpiad.reminder@gmail.com', [user.email], fail_silently=False)
+            send_mail('Сброс пароля', f'Ваш новый пароль: {new_password}\nДля входа перейдите на https://rosolympiad.ru/enter', 'rosolympiad.ru <olimpiad.reminder@gmail.com>', [user.email])
             return Response({'message': 'Новый пароль отправлен на ваш email'}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"detail": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)

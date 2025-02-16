@@ -10,6 +10,7 @@ const ConfirmEmail = () => {
   const { user } = useAuth();
 
   useEffect(() => {
+    localStorage.clear()
     const confirmEmail = async () => {
       try {
         const response = await API.get(`confirm-email/${token}/`);
