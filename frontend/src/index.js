@@ -7,6 +7,6 @@ import App from './App';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('page'));
-root.render(<React.StrictMode><AuthProvider><Router><App /></Router></AuthProvider></React.StrictMode>);
+root.render(<AuthProvider><Router><App /></Router></AuthProvider>);
 
 reportWebVitals();
