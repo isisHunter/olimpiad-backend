@@ -31,9 +31,11 @@ const Enter = () => {
         setMessage("Вы успешно зарегистрировались. Проверьте вашу почту для подтверждения");
         setError("");
       } else if (action === "login") {
+        setLoading(true);
         const response = await API.post("login/", formData);
         const token = response.data.token;
         localStorage.setItem("refresh", response.data.refresh);
+        setLoading(false);
         setMessage("Вы успешно вошли!");
         setError("");
         const userData = {email : formData.email, token : token};
@@ -72,9 +74,9 @@ const Enter = () => {
           </div>
         </form>
         <a class="reset" href="/reset-password">Забыли пароль?</a>
-        {loading && <p>Загрузка...</p>}
-        {message && !loading && <p style={{ color: "green" }}>{message}</p>}
-        {error && !loading && <p style={{ color: "red" }}>{error}</p>}
+        {loading && <p><span class="loader"/></p>}
+        {message && !loading && <p style={{color: "green"}}>{message}</p>}
+        {error && !loading && <p style={{color: "red"}}>{error}</p>}
         <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
     </div>
   );

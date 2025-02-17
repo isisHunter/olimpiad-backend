@@ -12,7 +12,7 @@ const Dashboard = () => {
     const [show, setShow] = useState({})
 
     const showContacts = async (id) => {
-      setButtons2((prevButtons) => ({...prevButtons, [id]: ["Загрузка...", true]}));
+      setButtons2((prevButtons) => ({...prevButtons, [id]: [<span class="loader"/>, true]}));
       const response = await axios.get(`http://localhost:8080/https://olimpiada.ru/activity/${id}`);
       const $ = cheerio.load(response.data);
       const link = $('div.contacts').last().find('a.color').attr('href');

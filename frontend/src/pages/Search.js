@@ -7,9 +7,11 @@ import * as cheerio from 'cheerio';
 
 const SearchPage = () => {
     const [filter, setFilter] = useState({grade : "1", subject : "0", type : "any"});
-    const [olympiads, setOlympiads] = useState([""]);
+    const [olympiads, setOlympiads] = useState([]);
     const [buttons1, setButtons1] = useState({});
     const [buttons2, setButtons2] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [NoOlympiads, setNoOlympiads] = useState(false);
     const { user } = useAuth();
 
     const confirmParticipation = async (id) => {
@@ -18,7 +20,7 @@ const SearchPage = () => {
     };
     
     const showContacts = async (id) => {
-      setButtons2((prevButtons) => ({...prevButtons, [id]: ["Загрузка...", true]}));
+      setButtons2((prevButtons) => ({...prevButtons, [id]: [<span class="loader"/>, true]}));
       const response = await axios.get(`http://localhost:8080/https://olimpiada.ru/activity/${id}`);
       const $ = cheerio.load(response.data);
       const link = $('div.contacts').last().find('a.color').attr('href');
@@ -32,16 +34,19 @@ const SearchPage = () => {
     };
 
     const findOlympiads = async () => {
+      setNoOlympiads(true)
+      setLoading(true)
       let response = await API.get(`olympiads/?grade=${filter.grade}&subject=${filter.subject}&type=${filter.type}`);
-      let data = await response.data;
-      setOlympiads(data);
-      data.map((olympiad) => (setButtons2((prevButtons) => ({...prevButtons, [olympiad.id]: ["Показать дополнительную информацию и ссылку на регистрацию", false]}))));
+      const olympiads_data = await response.data;
       if (user) {
-        data.map((olympiad) => (setButtons1((prevButtons) => ({...prevButtons, [olympiad.id]: ["Буду участвовать", false]}))));
         response = await API.get(`user/olympiads-get`);
-        data = await response.data;
+        const data = await response.data;
+        olympiads_data.map((olympiad) => (setButtons1((prevButtons) => ({...prevButtons, [olympiad.id]: ["Буду участвовать", false]}))));
         data.map((id) => (setButtons1((prevButtons) => ({...prevButtons, [id] : ["Вы указали своё участие в этой олимпиаде. Вам на почту будут приходить оповещения об её изменениях", true]}))))
       }
+      setLoading(false)
+      olympiads_data.map((olympiad) => (setButtons2((prevButtons) => ({...prevButtons, [olympiad.id]: ["Показать дополнительную информацию и ссылку на регистрацию", false]}))));
+      setOlympiads(olympiads_data);
     };
 
     return(
@@ -121,7 +126,7 @@ const SearchPage = () => {
                     {user && olympiad && <button class="soglashenie" onClick={() => confirmParticipation(olympiad.id, olympiad.subject)} disabled={buttons1[olympiad.id][1]}>{buttons1[olympiad.id][0]}</button>}
                     {olympiad && <button class="olimpiada_moreinfo" onClick={() => showContacts(olympiad.id)} disabled={buttons2[olympiad.id][1]}>{buttons2[olympiad.id][0]}</button>}
                   </div>
-                ))) : (<h1 style={{color : "red"}}>Олимпиады не найдены</h1>)}
+                ))) : (loading ? (<p><span class="loader"/></p>) : (NoOlympiads && <h1 style={{color : "red"}}>Олимпиады не найдены</h1>))}
             <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
         </div>
         )

@@ -36,7 +36,7 @@ const ResetPassword = () => {
                 <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 <div><button type="submit" class="search" disabled={loading || message}><span>Сбросить пароль</span></button></div>
             </form>
-            {loading && <p>Загрузка...</p>}
+            {loading && <p><span class="loader"/></p>}
             {message && !loading && <p style={{ color: "green" }}>{message}</p>}
             {error && !loading && <p style={{ color: "red" }}>{error}</p>}
             <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
