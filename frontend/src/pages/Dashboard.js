@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import API from "./api";
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import './Dashboard.css';
 import { useAuth } from '../authcontext';
 
@@ -10,23 +8,24 @@ const Dashboard = () => {
     const { user, logout } = useAuth();
     const [buttons2, setButtons2] = useState({});
     const [show, setShow] = useState({})
+    const [loading, setLoading] = useState(true);
 
     const showContacts = async (id) => {
       setButtons2((prevButtons) => ({...prevButtons, [id]: [<span class="loader"/>, true]}));
-      const response = await axios.get(`http://localhost:8080/https://olimpiada.ru/activity/${id}`);
-      const $ = cheerio.load(response.data);
-      const link = $('div.contacts').last().find('a.color').attr('href');
-      const list = $('div.info.block_with_margin_bottom p').map((_, element) => {const text = $(element).text(); return text.replace("Еще", ".").replace("...", "").replace(/\xa0/g, " ");}).get();
-      const description = list.join(' ');
+      const response = await API.get(`olympiad-get-info?id=${id}`);
+      const data = await response.data;
+      const link = data.link;
+      const description = data.description;
       setButtons2((prevButtons) => ({...prevButtons, [id]: [<><a class="olimpiada_link" href={link} target="_blank">Регистрация</a><p class="olimpiada_description">{description}</p></>, true]}));
     };
 
     const fetchUserOlympiads = async () => {
       const response = await API.get('user/olympiads-get-full')
       const data = await response.data;
-      setOlympiads(data);
+      setLoading(false);
       data.map((olympiad) => (setButtons2((prevButtons) => ({...prevButtons, [olympiad.id]: ["Показать дополнительную информацию и ссылку на регистрацию", false]}))));
       data.map((olympiad) => (setShow((prevShow) => ({...prevShow, [olympiad.id]: true}))));
+      setOlympiads(data);
     };
 
     const deleteUserOlympiads = async (id) => {
@@ -56,6 +55,7 @@ const Dashboard = () => {
             </div>
             <h2>Ваши олимпиады:</h2>
               <div>
+		{loading && <p><span class="loader"/></p>}
                 {olympiads.map((olympiad) => (show[olympiad.id] &&
                   <div class="olimpiada" id={olympiad.id}>
                     <p class="olimpiada_name">{olympiad.name}</p>

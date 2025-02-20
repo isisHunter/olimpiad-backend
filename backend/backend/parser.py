@@ -86,13 +86,13 @@ if __name__ == "__main__":
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
-    service = Service("C:/chromedriver-win64/chromedriver.exe")
+    service = Service("/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=options)
 
     conn = connect(
         dbname="olympiads",
         user="postgres",
-        password="12345",
+        password="SkibidiToiletGman",
         host="localhost",
         port="5432"
     )

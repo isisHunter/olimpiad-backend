@@ -116,7 +116,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'olympiads',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'SkibidiToiletGman',
+	'HOST': 'localhost',
+	'PORT': '5432',
     },
 }
 

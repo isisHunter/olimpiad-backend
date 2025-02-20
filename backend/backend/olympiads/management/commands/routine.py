@@ -55,10 +55,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Программа успешно завершена"))
 
-    conn = connect(dbname="olympiads", user="postgres", password="12345", host="localhost", port="5432")
+    conn = connect(dbname="olympiads", user="postgres", password="SkibidiToiletGman", host="localhost", port="5432")
     cursor = conn.cursor()
 
-    user_conn = user_connect("C:/olimpiad-backend/backend/backend/db.sqlite3")
+    user_conn = user_connect("/home/user/olimpiad-backend/backend/backend/db.sqlite3")
     user_cursor = user_conn.cursor()
     user_cursor.execute("SELECT Email, Olympiads FROM olympiads_user")
     user_olympiads = user_cursor.fetchall()
@@ -88,7 +88,7 @@ class Command(BaseCommand):
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
-    service = Service("C:/chromedriver-win64/chromedriver.exe")
+    service = Service("/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get("https://olimpiada.ru/activities")

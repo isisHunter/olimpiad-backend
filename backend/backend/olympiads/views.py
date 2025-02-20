@@ -1,4 +1,6 @@
 import random
+import requests
+from bs4 import BeautifulSoup
 from datetime import timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -141,3 +143,14 @@ class DeleteUserOylmpiadView(APIView):
         user.olympiads.remove(int(id))
         user.save()
         return Response({'message': 'Олимпиады удалены'})
+
+class GetMoreInfoOlympiadView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        id = request.query_params.get('id')
+        response = requests.get(f'https://olimpiada.ru/activity/{id}')
+        soup = BeautifulSoup(response.content, 'html.parser')
+        link = soup.find_all('div', class_='contacts')[-1].find('a', class_='color')['href']
+        list1 = [element.text.replace("Еще", ".").replace("...", "").replace('\xa0', ' ') for element in soup.find('div', class_='info block_with_margin_bottom').find_all('p')]
+        description = ' '.join(list1)
+        return Response({'link': link, 'description': description})
