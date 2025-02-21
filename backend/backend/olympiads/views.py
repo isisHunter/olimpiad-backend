@@ -151,6 +151,9 @@ class GetMoreInfoOlympiadView(APIView):
         response = requests.get(f'https://olimpiada.ru/activity/{id}')
         soup = BeautifulSoup(response.content, 'html.parser')
         link = soup.find_all('div', class_='contacts')[-1].find('a', class_='color')['href']
-        list1 = [element.text.replace("Еще", ".").replace("...", "").replace('\xa0', ' ') for element in soup.find('div', class_='info block_with_margin_bottom').find_all('p')]
+        try:
+            list1 = [element.text.replace("Еще", ".").replace("...", "").replace('\xa0', ' ') for element in soup.find('div', class_='info block_with_margin_bottom').find_all('p')]
+        except Exception:
+            list1 = []
         description = ' '.join(list1)
         return Response({'link': link, 'description': description})
