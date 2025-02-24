@@ -33,7 +33,7 @@ const SearchPage = () => {
     const findOlympiads = async () => {
       setNoOlympiads(true)
       setLoading(true)
-      let response = await API.get(`olympiads/?grade=${filter.grade}&subject=${filter.subject}&type=${filter.type}`);
+      let response = await API.get(`olympiads?grade=${filter.grade}&subject=${filter.subject}&type=${filter.type}`);
       const olympiads_data = await response.data;
       if (user) {
         response = await API.get(`user/olympiads-get`);
