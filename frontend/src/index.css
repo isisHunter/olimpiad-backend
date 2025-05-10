@@ -115,3 +115,7 @@ footer span {
   font-size: 23px;
   font-weight: 600;
 }
+
+header {
+  padding-bottom: 2px;
+}

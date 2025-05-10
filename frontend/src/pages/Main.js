@@ -4,6 +4,7 @@ function Main() {
     const { user } = useAuth();
     return(
         <div class="main">
+            <title>rosolympiad.ru</title>
             <header class="main_box">
                 <a class="name" href="/">rosolympiad.ru</a>
                 {user ? (<a class="enter" href="/dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="/enter">Вход/Регистрация</a>)}
@@ -1744,7 +1745,7 @@ function Main() {
                     </tr>
                 </tbody>
             </table>
-            <footer>rosolympiad.ru 2025. Часть материалов была взята с сайта <a href="https://olimpiada.ru/" target="_blank">© Олимпиада.ру</a><tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
+            <footer>rosolympiad.ru 2025<tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
         </div>
     )
 }
