@@ -19,7 +19,6 @@ const Enter = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log("вход");
   const handleSubmit = async (e) => {
     e.preventDefault();
 

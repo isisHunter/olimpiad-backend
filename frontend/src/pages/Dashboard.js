@@ -137,7 +137,6 @@ const Dashboard = () => {
     const handleLogout = () => {
       logout();
     };
-    console.log("лк")
     useEffect(() => {
       fetchUserOlympiads();
       datesContainer = document.getElementById("dates");
