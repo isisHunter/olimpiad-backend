@@ -28,7 +28,8 @@ const ResetPassword = () => {
             <header class="main_box">
                 <a class="name" href="/">rosolympiad.ru</a>
                 <a class="enter" href="/enter">Вход/Регистрация</a>
-                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="enter" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a>
+                <a class="search" href="/AI" style={{float : "right"}}><span>Подготовка с ИИ</span></a> 
             </header>
             <h1>Сброс пароля</h1>
             <form onSubmit={handleSubmit}>

@@ -1,0 +1,53 @@
+.chatbox {
+    flex: 1;
+    background: #e6e6e6;
+    margin: 0 20px 0 20px;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.message-content {
+  font-family: sans-serif;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 1rem 0 20px;
+  background-color: rgb(215, 215, 215);
+  padding: 0px 15px 0px 15px;
+  border-radius: 20px;
+}
+
+.message-content h3 {
+  margin-top: 1rem;
+}
+
+.message-content ul {
+  padding-left: 20px;
+}
+
+.message-content a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgb(185, 185, 185);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    animation: rotation 1s linear infinite;
+    }
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

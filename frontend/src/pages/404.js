@@ -7,7 +7,8 @@ function Error404() {
             <header class="main_box">
                 <a class="name" href="/">rosolympiad.ru</a>
                 {user ? (<a class="enter" href="/dashboard">{user.email.split('@')[0]}</a>) : (<a class="enter" href="/enter">Вход/Регистрация</a>)}
-                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="enter" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a>
+                <a class="search" href="/AI" style={{float : "right"}}><span>Подготовка с ИИ</span></a> 
             </header>
             <h1 style={{ color: 'red' }}>404</h1>
             <h2 style={{ color: 'red' }}>Страница не найдена</h2>

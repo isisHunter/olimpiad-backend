@@ -4,7 +4,7 @@ import './Dashboard.css';
 import { useAuth } from '../authcontext';
 
 const Dashboard = () => {
-    const [olympiads, setOlympiads] = useState([""]);
+    const [olympiads, setOlympiads] = useState([]);
     const { user, logout } = useAuth();
     const [buttons2, setButtons2] = useState({});
     const [show, setShow] = useState({})
@@ -137,7 +137,7 @@ const Dashboard = () => {
     const handleLogout = () => {
       logout();
     };
-  
+    console.log("лк")
     useEffect(() => {
       fetchUserOlympiads();
       datesContainer = document.getElementById("dates");
@@ -170,7 +170,8 @@ const Dashboard = () => {
             <header class="main_box">
                 <a class="name" href="/">rosolympiad.ru</a>
                 <a class="enter" href="/dashboard">{user.email.split('@')[0]}</a>
-                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="enter" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a>
+                <a class="search" href="/AI" style={{float : "right"}}><span>Подготовка с ИИ</span></a> 
             </header>
             
             <div class="calendar">
@@ -190,8 +191,7 @@ const Dashboard = () => {
             </div>
             <h2>Ваши олимпиады:</h2>
               <div>
-		{loading && <p><span class="loader"/></p>}
-                {olympiads.map((olympiad) => (show[olympiad.id] &&
+                {olympiads.length ? (olympiads.map((olympiad) => (show[olympiad.id] &&
                   <div class="olimpiada" id={olympiad.id}>
                     <p class="olimpiada_name">{olympiad.name}</p>
                     <p class="olimpiada_info">{olympiad.description}</p><hr/>
@@ -199,7 +199,7 @@ const Dashboard = () => {
                     <button class="soglashenie" onClick={() => deleteUserOlympiads(olympiad.id, olympiad.subject)}>Не буду участвовать</button>
                     {olympiad && <button class="olimpiada_moreinfo" onClick={() => showContacts(olympiad.id)} disabled={buttons2[olympiad.id][1]}>{buttons2[olympiad.id][0]}</button>}
                   </div>
-                ))}
+                ))) : (loading ? (<p><span class="loader"/></p>) : (<h1 style={{color : "red"}}>Олимпиады не выбраны</h1>))}
               </div>
               <footer>rosolympiad.ru 2025<tr/>Проект выполнили ученики лицея №1511<tr/>Мельников Антон и Манчуленко Василий<tr/>По всем вопросам писать на <a href="mailto:olimpiad.reminder@gmail.com">olimpiad.reminder@gmail.com</a></footer>
         </div>

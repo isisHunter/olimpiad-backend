@@ -19,7 +19,7 @@ const Enter = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  console.log("вход");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,7 +55,8 @@ const Enter = () => {
         <header class="main_box">
                 <a class="name" href="/">rosolympiad.ru</a>
                 <a class="enter" href="/enter">Вход/Регистрация</a>
-                <a class="search" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a> 
+                <a class="enter" href="/search" style={{float : "right"}}><span>Поиск по фильтрам</span></a>
+                <a class="search" href="/AI" style={{float : "right"}}><span>Подготовка с ИИ</span></a> 
         </header>
         <h1>{action === "register" ? "Регистрация" : "Вход"}</h1>
         <button  class="btn" onClick={() => (setAction("login"), setError(""), setMessage(""), setLoading(false))}>Вход</button>
