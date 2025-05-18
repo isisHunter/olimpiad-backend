@@ -1,5 +1,6 @@
 import random
 import requests
+from openai import OpenAI
 from bs4 import BeautifulSoup
 from datetime import timedelta
 from rest_framework.views import APIView
@@ -157,3 +158,59 @@ class GetMoreInfoOlympiadView(APIView):
             list1 = []
         description = ' '.join(list1)
         return Response({'link': link, 'description': description})
+    
+class GetTaskView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        grade = request.data.get('grade')
+        name = request.data.get('name')
+        subject = request.data.get('subject')
+        description = request.data.get('description')
+        client = OpenAI(
+        base_url = "https://openrouter.ai/api/v1",
+        api_key = "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")
+        response = client.chat.completions.create(
+        model = "deepseek/deepseek-chat-v3-0324:free:online",
+        stream=False,
+        messages = [
+            {
+            "role": "system",
+            "content": "Ваша задача - дать 5 - 10 заданий для подготовки по теме, а также прислать прямые ссылки на сайты с материалами для подготовки"
+            },
+            {
+            "role": "user",
+            "content": f"Я хочу подготовиться к олимпиаде {name} по {subject} {grade} класс: {description}. Пришлите задания для подготовки и ссылки на сайты с материалами для подготовки (обязательно укажите ссылки)."
+            },
+        ]
+        )
+        return Response({'answer': response.choices[0].message.content})
+
+class GetAnsView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        prevmsg = request.data.get('prevmsg')
+        client = OpenAI(
+        base_url = "https://openrouter.ai/api/v1",
+        api_key = "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")
+        response = client.chat.completions.create(
+        model = "deepseek/deepseek-chat-v3-0324:free:online",
+        messages = [
+            {
+            "role": "system",
+            "content": "Ваша задача - дать ответы на задания из вашего прошлого сообщения"
+            },
+            {
+            "role": "assistant",
+            "content": prevmsg
+            },
+            {
+            "role": "user",
+            "content": "Дайте ответы"
+            },
+        ]
+        )
+        return Response({'answer': response.choices[0].message.content})
