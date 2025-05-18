@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView, ConfirmEmailView, LoginView, CustomTokenRefreshView, OlympiadListView, UserOlympiadView, FecthUserOlympiadView, FecthUserOlympiadViewFull, DeleteUserOylmpiadView, ResetPasswordView, GetMoreInfoOlympiadView
+from .views import RegisterView, ConfirmEmailView, LoginView, CustomTokenRefreshView, OlympiadListView, UserOlympiadView, FecthUserOlympiadView, FecthUserOlympiadViewFull, DeleteUserOylmpiadView, ResetPasswordView, GetMoreInfoOlympiadView, GetTaskView, GetAnsView
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
@@ -13,4 +13,6 @@ urlpatterns = [
     path('user/olympiads-get', FecthUserOlympiadView.as_view(), name='user-olympiads-get'),
     path('user/olympiads-get-full', FecthUserOlympiadViewFull.as_view(), name='user-olympiads-get-full'),
     path('user/olympiads-delete', DeleteUserOylmpiadView.as_view(), name='user-olympiads-delete'),
+    path('user/get-task', GetTaskView.as_view(), name='user-get-task'),
+    path('user/get-task-ans', GetAnsView.as_view(), name='user-get-task-ans'),
 ]
